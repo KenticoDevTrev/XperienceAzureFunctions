@@ -8,7 +8,6 @@ using System.IO;
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
-using CMS.Membership;
 
 [assembly: FunctionsStartup(typeof(MyNamespace.Startup))]
 namespace MyNamespace
@@ -31,8 +30,8 @@ namespace MyNamespace
                 // Prinit types
                 CMSApplication.PreInit();
 
-                // Declare any Interfaces here
-                builder.Services.AddTransient<IUserInfoProvider, UserInfoProvider>();
+                // Declare any Interfaces here, note you do not need to add any interfaces that are automatically implemented through Xperience's IoC attributes such as ProviderInterface
+                //builder.Services.AddTransient<ICustomRepository, CustomRepository>();
 
                 // Merge kentico services into the builder services
                 Service.MergeDescriptors(builder.Services);
@@ -60,6 +59,8 @@ namespace MyNamespace
 
                 // Init database
                 CMSApplication.Init();
+
+                
             }
             catch (Exception ex)
             {
